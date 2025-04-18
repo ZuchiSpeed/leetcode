@@ -1,8 +1,15 @@
+import { authModalState } from "@/atoms/authModelAtoms";
 import React from "react";
+import { useSetRecoilState } from "recoil";
 
 type ResetPasswordProps = {};
 
 const ResetPassword: React.FC<ResetPasswordProps> = () => {
+  const setAuthModelState = useSetRecoilState(authModalState);
+    const handleClick = (type: "login" | "register" | "forgotPassword") => {
+      setAuthModelState((prev) => ({ ...prev, type: "forgotPassword" }));
+    };
+
   return (
     //ResetPassword Form
     <form
@@ -35,6 +42,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
         type="submit"
         className={`w-full text-white  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
                 bg-brand-orange hover:bg-brand-orange-s `}
+                onClick={() => handleClick}
       >
         Reset Password
       </button>
