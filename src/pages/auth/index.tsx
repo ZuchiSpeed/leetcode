@@ -1,9 +1,12 @@
 import Navbar from "@/components/Navbar/Navbar";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import AuthModel from "@/components/Models/AuthModel";
 import { useRecoilValue } from "recoil";
 import Image from "next/image";
 import { authModalState } from "@/atoms/authModelAtoms";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/firebase/firebase";
+import { useRouter } from "next/router";
 
 type AuthPageProps = {};
 
@@ -11,6 +14,19 @@ const AuthPage: React.FC<AuthPageProps> = () => {
   // Get the authModel state from Recoil
   // This state is used to control the visibility and type of the authentication modal (login, signup, etc.)
   const authModel = useRecoilValue(authModalState);
+  const [user, loading, error] = useAuthState(auth); // Get the current user state from Firebase authentication
+  const router = useRouter(); // Initialize the Next.js router
+  const [pageLoading, setPageLoading] = useState(true);
+
+  //if user is logged in, redirect to home page
+  useEffect(() => {
+    if (user) {
+      router.push("/"); // Redirect to home page if user is logged in
+    }
+    if (!loading && !user) return setPageLoading(false);
+  }, [user, router, loading]);
+
+  if (pageLoading) return null;
 
   return (
     <div className="bg-gradient-to-b from-gray-600 to-black h-screen relative">
