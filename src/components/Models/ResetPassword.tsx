@@ -1,20 +1,35 @@
-import { authModalState } from "@/atoms/authModelAtoms";
-import React from "react";
-import { useSetRecoilState } from "recoil";
+import { auth } from "@/firebase/firebase";
+import React, { useEffect, useState } from "react";
+import { useSendPasswordResetEmail } from "react-firebase-hooks/auth";
 
 type ResetPasswordProps = {};
 
 const ResetPassword: React.FC<ResetPasswordProps> = () => {
-  const setAuthModelState = useSetRecoilState(authModalState);
-    const handleClick = (type: "login" | "register" | "forgotPassword") => {
-      setAuthModelState((prev) => ({ ...prev, type: "forgotPassword" }));
-    };
+  const [email, setEmail] = useState("");
+  //use auth hook to send password reset email
+  //useSendPasswordResetEmail is a custom hook that sends a password reset email to the user
+  const [sendPasswordResetEmail, error, loading] =
+    useSendPasswordResetEmail(auth);
+
+  const handleReset = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const success = await sendPasswordResetEmail(email);
+    if (success) {
+      alert("Password reset email sent successfully!");
+    }
+  };
+
+  useEffect(() => {
+    if (error) {
+      alert(`Error: ${error}`);
+    }
+  }, [error]);
 
   return (
     //ResetPassword Form
     <form
       className="space-y-6 px-6 lg:px-8 pb-4 sm:pb-6 xl:pb-8"
-      onSubmit={() => {}}
+      onSubmit={handleReset}
     >
       <h3 className="text-xl font-medium  text-white">Reset Password</h3>
       <p className="text-sm text-white ">
@@ -31,7 +46,7 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
         <input
           type="email"
           name="email"
-          onChange={() => {}}
+          onChange={(e) => setEmail(e.target.value)}
           id="email"
           className="border-2 outline-none sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-gray-600 border-gray-500 placeholder-gray-400 text-white"
           placeholder="name@company.com"
@@ -42,7 +57,6 @@ const ResetPassword: React.FC<ResetPasswordProps> = () => {
         type="submit"
         className={`w-full text-white  focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center 
                 bg-brand-orange hover:bg-brand-orange-s `}
-                onClick={() => handleClick}
       >
         Reset Password
       </button>
