@@ -3,6 +3,7 @@ import { auth } from "@/firebase/firebase";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 import { useSetRecoilState } from "recoil";
 
 type LoginProps = {};
@@ -34,7 +35,7 @@ const Login: React.FC<LoginProps> = () => {
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inputs.email || !inputs.password) {
-      return alert("Please complete all fields");
+      return toast.error("Please complete all fields", {position: "top-center", autoClose: 5000});
     }
 
     try {
@@ -49,7 +50,7 @@ const Login: React.FC<LoginProps> = () => {
       router.push("/");
     } catch (error: any) {
       // Displays any authentication errors to the user
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 

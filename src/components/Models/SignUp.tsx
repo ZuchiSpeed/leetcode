@@ -4,6 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/firebase/firebase";
 import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 type LoginProps = {};
 
@@ -43,7 +44,7 @@ const SignUp: React.FC<LoginProps> = () => {
 
     // Check if all fields are filled
     if (!inputs.email || !inputs.password || !inputs.displayName)
-      return alert("Please fill all the fields");
+      return toast.error("Please fill all the fields");
 
     try {
       //create a new user with email and password
@@ -59,13 +60,13 @@ const SignUp: React.FC<LoginProps> = () => {
       // if user does not exist, return null
       if (!newUser) return;
     } catch (error: any) {
-      alert(error.message);
+      toast.error(error.message);
     }
   };
 
   useEffect(() => {
     if (error) {
-      alert(error.message);
+      toast.error(error.message);
     }
   }, [error]);
 
@@ -150,7 +151,7 @@ const SignUp: React.FC<LoginProps> = () => {
       <div className="text-sm font-medium text-gray-300">
         Already have an account?{" "}
         <a
-          href="#"
+          href=""
           className="text-blue-700 hover:underline"
           onClick={() => {
             handleClick;

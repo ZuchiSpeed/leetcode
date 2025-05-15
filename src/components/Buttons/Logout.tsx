@@ -2,6 +2,7 @@ import { auth } from "@/firebase/firebase";
 import React from "react";
 import { useSignOut } from "react-firebase-hooks/auth";
 import { FiLogOut } from "react-icons/fi";
+import { toast } from "react-toastify";
 
 type Props = {};
 
@@ -13,7 +14,7 @@ const Logout: React.FC<Props> = () => {
     // Add your logout logic here
     signOut();
 
-    console.log("User logged out");
+    toast.success("User logged out");
   };
 
   return (
