@@ -1,5 +1,5 @@
 import Topbar from "@/components/Topbar/Topbar";
-// import Workspace from "@/components/Workspace/workspace";
+import Workspace from "@/components/Workspace/Workspace";
 import { Problem } from "@/mockProblems/problems";
 
 type ProblemPageProps = {
@@ -10,7 +10,7 @@ const ProblemPage: React.FC<ProblemPageProps> = ({ problem }) => {
   return (
     <div>
       <Topbar problemPage />
-      {/* <Workspace problem /> */}
+      <Workspace problem={problem} />
     </div>
   );
 };
