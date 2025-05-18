@@ -3,12 +3,13 @@ import Split from "react-split";
 import CodeMirror from "@uiw/react-codemirror";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import { javascript } from "@codemirror/lang-javascript";
+import EditorFooter from "./EditorFooter";
 
 type PlaygroundProps = {};
 
 const Workspace: React.FC<PlaygroundProps> = ({}) => {
   return (
-    <div className="flex flex-col bg-dark-layer-1 relative">
+    <div className="flex flex-col bg-dark-layer-1 relative overflow-x-hidden">
       <PreferenceNav />
 
       <Split
@@ -32,7 +33,7 @@ const Workspace: React.FC<PlaygroundProps> = ({}) => {
               <div className="text-sm font-medium leading-5 text-white">
                 TestCases
               </div>
-              <hr className="absolute bottom-0 h-0.5 w-16 rounded-full border-none bg-white" />
+              <hr className="absolute bottom-0 h-0.5 w-full rounded-full border-none bg-white" />
             </div>
           </div>
 
@@ -77,6 +78,7 @@ const Workspace: React.FC<PlaygroundProps> = ({}) => {
           </div>
         </div>
       </Split>
+      <EditorFooter handleSubmit={() => {}} />
     </div>
   );
 };
