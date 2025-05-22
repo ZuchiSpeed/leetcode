@@ -7,7 +7,11 @@ import EditorFooter from "./EditorFooter";
 
 type PlaygroundProps = {};
 
-const Workspace: React.FC<PlaygroundProps> = ({}) => {
+const Playground: React.FC<PlaygroundProps> = ({}) => {
+  const boilerplateCode = `const twoSum = (nums, target) => {
+  // Your code here
+  }`;
+
   return (
     <div className="flex flex-col bg-dark-layer-1 relative overflow-x-hidden">
       <PreferenceNav />
@@ -20,7 +24,7 @@ const Workspace: React.FC<PlaygroundProps> = ({}) => {
       >
         <div className="w-full overflow-auto">
           <CodeMirror
-            value="const a = 1;"
+            value={boilerplateCode}
             theme={vscodeDark}
             extensions={[javascript()]}
             style={{ fontSize: 16 }}
@@ -83,4 +87,4 @@ const Workspace: React.FC<PlaygroundProps> = ({}) => {
   );
 };
 
-export default Workspace;
+export default Playground;

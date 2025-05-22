@@ -1,6 +1,5 @@
 import { auth } from "@/firebase/firebase";
-import { Problem, problems } from "@/mockProblems/problems";
-import Image from "next/image";
+import { Problem } from "@/mockProblems/problems";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -60,42 +59,86 @@ const ProblemDescription: React.FC<ProblemDescriptionProps> = ({ problem }) => {
                 <TiStarOutline />
               </div>
             </div>
-            
+
             {/* Problem Statement(paragraphs) */}
-            <div className="text-white text-sm"></div>
+            <div className="text-white text-sm">
+              <p className="mt-3">
+                Given an array of integers <code>nums</code> and an integer
+                <code>target</code>, return
+                <em>
+                  indices of the two numbers such that they add up to
+                </em>{" "}
+                <code>target</code>.
+              </p>
+              <p className="mt-3">
+                You may assume that each input would have{" "}
+                <strong>exactly one solution</strong>, and you may not use the
+                same element twice.
+              </p>
+
+              <p className="mt-3">You can return the answer in any order.</p>
+            </div>
 
             {/* Examples */}
             <div className="mt-4">
-              {/* {problem.examples.map((example, index) => (
-                <div key={example.id}>
-                  <p className="font-medium text-white ">
-                    Example {index + 1}:{" "}
-                  </p>
-                  {example.img && (
-                    <Image src={example.img} alt="" className="mt-3" />
-                  )}
-                  <div className="example-card">
-                    <pre>
-                      <strong className="text-white">Input: </strong>{" "}
-                      {example.inputText}
-                      <br />
-                      <strong>Output:</strong>
-                      {example.outputText} <br />
-                      {example.explanation && (
-                        <>
-                          <strong>Explanation:</strong> {example.explanation}
-                        </>
-                      )}
-                    </pre>
-                  </div>
+              <div>
+                <p className="font-medium text-white">Example 1:</p>
+                <div className="example-card">
+                  <pre>
+                    <strong className="text-white">Input: </strong>nums =
+                    [2,7,11,15], target = 9 <br />
+                    <strong>Outputs:</strong> [0,1] <br />
+                    <strong>Explanation:</strong> Becouse nums[0] + nums[1] ==
+                    9, we return [0, 1],
+                  </pre>
                 </div>
-              ))} */}
+              </div>
+
+              <div>
+                <p className="font-medium text-white">Example 2:</p>
+                <div className="example-card">
+                  <pre>
+                    <strong className="text-white">Input:</strong>
+                    nums = [2,7,11,15], target = 9 <br />
+                    <strong>Output:</strong> [0,1]
+                    <br />
+                    <strong>Explanation:</strong> Because nums[0] + nums[1] ==
+                    9, we return [0, 1].
+                  </pre>
+                </div>
+              </div>
+
+              <div>
+                <p className="font-medium text-white">Example 3:</p>
+                <div className="example-card">
+                  <pre>
+                    <strong className="text-white">Input:</strong>
+                    nums = [3, 3], target = 6 <br />
+                    <strong>Output:</strong> [0,1]
+                    <br />
+                    <strong>Explanation:</strong>[0, 1] <br />
+                  </pre>
+                </div>
+              </div>
             </div>
 
             {/* Constraints */}
-            <div className="my-8 pb-4">
+            <div className="my-5">
               <div className="text-white text-sm font-medium">Constraints:</div>
-              <ul className="text-white ml-5 list-disc "></ul>
+              <ul className="text-white ml-5 list-disc">
+                <li className="mt-2">
+                  <code>2 ≤ nums.length ≤ 10</code>
+                </li>
+                <li className="mt-2">
+                  <code>-10 ≤ nums[i] ≤ 10</code>
+                </li>
+                <li className="mt-2">
+                  <code>-10 ≤ target ≤ 10</code>
+                </li>
+                <li className="mt-2 text-sm">
+                  <strong>Only one valid answer exists.</strong>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
